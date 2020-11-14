@@ -3,7 +3,6 @@ package view
 import tornadofx.*
 import Classes.*
 import javafx.stage.FileChooser
-import java.io.File
 
 class MainView :View () {
 

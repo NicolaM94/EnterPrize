@@ -8,4 +8,6 @@ class AssetClass () {
     val allAssetsCounts = mutableListOf<Count>()
     val allAssetCountsProperty = SimpleListProperty(allAssetsCounts.asObservable())
 
+
+
 }
