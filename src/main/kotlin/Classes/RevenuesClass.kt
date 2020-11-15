@@ -3,7 +3,7 @@ package Classes
 import javafx.beans.property.SimpleListProperty
 import tornadofx.asObservable
 
-class RevenuesClass () {
+object RevenuesClass {
 
     val allRevenuesCounts = mutableListOf<Count>()
     val allRevenuesCountsProperty = SimpleListProperty(allRevenuesCounts.asObservable())
