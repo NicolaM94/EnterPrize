@@ -2,7 +2,7 @@ package Classes.Balances
 
 import Classes.RevenuesClass
 
-class CostOfSalesBalance () {
+object CostOfSalesBalance {
 
     fun netRevenues () :Double {
         var result = 0.00
