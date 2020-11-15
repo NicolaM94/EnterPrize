@@ -1,28 +1,16 @@
 package Classes.Balances
 
-import Classes.RDVBalanceContentCatcher
 import Classes.RevenuesClass
-import tornadofx.find
-import Classes.*
 
 class CostOfSalesBalance () {
 
-    var netRevenues :Double = 0.0
-    val costOfSales :Double = 0.0
-
-    init {
-        //Populating netRevenues
-        RevenuesClass.allRevenuesCountsProperty.forEach { count ->
-            when (count.countId) {
-                in 40010.00..40200.00 -> netRevenues += count.countValue
-                in 40300.00..40400.00 -> netRevenues += count.countValue
-                in 40410.00..40500.00 -> netRevenues += count.countValue
-            }
-        }
-        //Populating costOfSales
-        CostClass.allCostCountsProperty.forEach {
-            //TODO Finish to populate costOfSales
-        }
+    fun netRevenues () :Double {
+        var result = 0.00
+        result += RevenuesClass.sellsRevenues().sumOf { it.countValue }
+        result += RevenuesClass.servicesRevenues().sumOf { it.countValue }
+        result -= RevenuesClass.adjustmentsCoreRevenues().sumOf { it.countValue }
+        result += RevenuesClass.agriculturalRevenues().sumOf { it.countValue }
+        return result
     }
 
 
