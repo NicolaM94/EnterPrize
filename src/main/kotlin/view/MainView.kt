@@ -20,7 +20,7 @@ class MainView :View () {
 
     override val root = borderpane {
 
-        title = "EnterPrize - Menù"
+        title = "EnterPrize @Nicola Moro - 2020"
 
         
         left = vbox {
@@ -47,18 +47,14 @@ class MainView :View () {
             button ("C.E. Al costo del venduto") {
                 action {
                     val a = CostOfSalesBalance
-                    println(a.netRevenues())
-                    println(a.costOfSales())
-                    println(a.grossOperativeResult())
+                    println("Ricavi Netti: ${a.netRevenues()}")
+                    println("Costo del venduto: ${a.costOfSales()}")
+                    println("Risultato della gestione industriale: ${a.grossOperativeResult}")
+                    println("Costi commerciali: ${a.commercialCosts()}")
+                    println("Risultato operativo: ${a.operativeResult}")
+                    println("Risultato della gestione: ${a.managerialResult}")
                 }
             }
-
-            style {
-                borderColor.add(CssBox(Color.CADETBLUE,Color.CADETBLUE,Color.CADETBLUE,Color.CADETBLUE))
-                backgroundColor.add(Color.LIGHTBLUE)
-            }
-            
         }
-
     }
 }
