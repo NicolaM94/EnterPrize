@@ -248,7 +248,6 @@ object CostClass  {
         }
         return collector
     }
-
     fun startingInventories () :MutableList<Count> {
         val collector = mutableListOf<Count>()
         allCostCountsProperty.forEach {

@@ -46,7 +46,10 @@ class MainView :View () {
             label ("Altre funzioni") {  }
             button ("C.E. Al costo del venduto") {
                 action {
-                    val a = CostOfSalesBalance().netRevenues()
+                    val a = CostOfSalesBalance
+                    println(a.netRevenues())
+                    println(a.costOfSales())
+                    println(a.grossOperativeResult())
                 }
             }
 
