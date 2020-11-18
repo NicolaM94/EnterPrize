@@ -33,9 +33,7 @@ object CostOfSalesBalance {
         result += CostClass.veichlesDepreciations().sumOf { it.countValue }
         return result
     }
-    /*fun grossOperativeResult () :Double {
-        return netRevenues() - costOfSales()
-    }*/
+
     val grossOperativeResult :Double by lazy {
         netRevenues() - costOfSales()
     }
