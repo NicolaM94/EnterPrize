@@ -5,6 +5,7 @@ import Classes.*
 import Classes.Balances.CostOfSalesBalance
 import javafx.geometry.NodeOrientation
 import javafx.geometry.Orientation
+import javafx.scene.Node
 import javafx.scene.layout.Background
 import javafx.scene.layout.BackgroundFill
 import javafx.scene.paint.Color
@@ -23,39 +24,15 @@ class MainView :View () {
 
     }
 
+    val menu :MenuView by inject()
+
+
 
     override val root = borderpane {
 
         title = "EnterPrize @Nicola Moro - 2020"
 
-        top = vbox {
-            menubar {
-                menu ("File") {}
-                menu ("Visualizza") {}
-            }
-            separator()
-            menubar {
-                style {
-                    this.backgroundColor.add(Color.LIGHTBLUE)
-                }
-                menu("Riclassificazioni") {
-                    menu("Conto Economico") {
-                        item("Costo del venduto"){  }
-                        item ("Valore aggiunto") {}
-                        item ("Margine di contribuzione") {}
-                    }
-                    menu("Stato Patrimoniale") {}
-                }
-                menu("Analisi Reddituale") { }
-                menu("Analisi Patrimoniale") {}
-                menu ("Analisi della solidità"){ }
-                menu ("Analisi del pareggio"){  }
-                menu ("Analisi del contesto") {}
-                menu("Analisi clientela") {}
-                menu ("Costruzione del preventivo") {}
-            }
-            separator()
-        }
+        top = menu.root
 
         center = tableview (RDVBalanceContentCatcher(pathToBalance).allCountsProperty) {
 

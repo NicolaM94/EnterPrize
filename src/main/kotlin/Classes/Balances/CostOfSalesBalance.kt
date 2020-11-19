@@ -11,6 +11,8 @@ object CostOfSalesBalance {
         result += RevenuesClass.servicesRevenues().sumOf { it.countValue }
         result -= RevenuesClass.adjustmentsCoreRevenues().sumOf { it.countValue }
         result += RevenuesClass.agriculturalRevenues().sumOf { it.countValue }
+        result += RevenuesClass.selfConsume().sumOf { it.countValue }
+        result += RevenuesClass.assetsIncrementations().sumOf { it.countValue }
         return result
     }
     fun costOfSales () :Double {
@@ -38,6 +40,15 @@ object CostOfSalesBalance {
         netRevenues() - costOfSales()
     }
 
+    fun commercialRevenues () :Double {
+        var result = 0.00
+        result += RevenuesClass.otherRevenues().sumOf { it.countValue }
+        result += RevenuesClass.contributionsRevenues().sumOf { it.countValue }
+        result += RevenuesClass.assetsRestorationsRevenues().sumOf { it.countValue }
+        result += RevenuesClass.adjustmentsOtherRevenues().sumOf { it.countValue }
+        result += RevenuesClass.prepaidTaxes().sumOf { it.countValue }
+        return result
+    }
     fun commercialCosts () :Double {
         var result = 0.00
         result += CostClass.commercialCosts().sumOf { it.countValue }
@@ -52,11 +63,16 @@ object CostOfSalesBalance {
         result += CostClass.otherleasingCosts().sumOf { it.countValue }
         result += CostClass.adjustmentsLeasingCosts().sumOf { it.countValue }
         result += CostClass.commercialDepreciations().sumOf { it.countValue }
+        result += CostClass.intangibleDepreciations().sumOf { it.countValue }
+        result += CostClass.taxesAndRights().sumOf { it.countValue }
+        result += CostClass.otherManagerialCosts().sumOf { it.countValue }
+        result += CostClass.adjustmentsManagerialCosts().sumOf { it.countValue }
+        result += CostClass.previousAndDeferredTaxes().sumOf { it.countValue }
         return result
     }
 
     val operativeResult :Double by lazy {
-        grossOperativeResult - commercialCosts()
+        grossOperativeResult + commercialRevenues() - commercialCosts()
     }
 
     fun financialRevenues () :Double {
@@ -64,7 +80,7 @@ object CostOfSalesBalance {
         result += RevenuesClass.partecipationsRevenues().sumOf { it.countValue }
         result += RevenuesClass.activeInterests().sumOf { it.countValue }
         result += RevenuesClass.otherFinancialRevenues().sumOf { it.countValue }
-        result += RevenuesClass.capitalGainRevenues().sumOf { it.countValue }
+        result += RevenuesClass.revaluationsRevenues().sumOf { it.countValue }
         return result
     }
     fun financialCosts () :Double {
@@ -80,6 +96,27 @@ object CostOfSalesBalance {
         operativeResult + financialRevenues() - financialCosts()
     }
 
+    fun extraordinaryRevenues () :Double {
+        var result :Double = 0.00
+        result += RevenuesClass.capitalGainRevenues().sumOf { it.countValue }
+        result += RevenuesClass.otherExtraordinaryRevenues().sumOf { it.countValue }
+        return result
+    }
+    fun extraordinaryCosts () :Double {
+        var result :Double = 0.00
+        result += CostClass.depreciationsIntangibleAssets().sumOf { it.countValue }
+        result += CostClass.depreciationsTangibleAssets().sumOf { it.countValue }
+        result += CostClass.inventoriesDeprecitations().sumOf { it.countValue }
+        result += CostClass.riskFundsProvisions().sumOf { it.countValue }
+        result += CostClass.extraordinaryCapitalLosses().sumOf { it.countValue }
+        result += CostClass.otherExtraordinaryCosts().sumOf { it.countValue }
+        result -= CostClass.costsConsolidatedRegime().sumOf { it.countValue }
+        result += CostClass.costsConsolidatedRegime().sumOf { it.countValue }
+        return result
+    }
+    val earningBeforeTaxes :Double by lazy {
+        managerialResult + extraordinaryRevenues() - extraordinaryCosts()
+    }
 
 }
 
