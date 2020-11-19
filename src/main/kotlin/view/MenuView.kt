@@ -19,7 +19,8 @@ class MenuView() :View() {
                 menu("Conto Economico") {
                     item("Costo del venduto"){
                         action {
-                            replaceWith<CostOfSalesView>()
+                            val a = find<MainView>()
+                            a.replaceWith<CostOfSalesView>()
                         }
                     }
                     item ("Valore aggiunto") {}

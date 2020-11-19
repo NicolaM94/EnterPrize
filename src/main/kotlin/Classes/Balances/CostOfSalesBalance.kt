@@ -118,5 +118,8 @@ object CostOfSalesBalance {
         managerialResult + extraordinaryRevenues() - extraordinaryCosts()
     }
 
+    val totalRevenues = netRevenues()+ commercialRevenues()+ financialRevenues()+ extraordinaryRevenues()
+    val totalCosts = costOfSales() + commercialCosts() + financialCosts() + extraordinaryCosts()
+
 }
 
