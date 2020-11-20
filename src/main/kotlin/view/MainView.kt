@@ -36,11 +36,18 @@ class MainView :View () {
 
         center = tableview (RDVBalanceContentCatcher(pathToBalance).allCountsProperty) {
 
-                column("ID",Count::countId)
-                column("Nome",Count::countName)
-                column("Valore",Count::countValue)
-                column("Tipo",Count::countType)
-                column("Durata",Count::countDuration)
+            column("ID",Count::countId)
+            column("Nome",Count::countName)
+            column("Valore",Count::countValue)
+            column("Tipo",Count::countType)
+            column("Durata",Count::countDuration)
+
+            contextmenu {
+                item("Modifica").action {
+                    openInternalWindow<ModifierPopUp>()
+                }
+            }
+
         }
     }
 }

@@ -1,7 +1,10 @@
 package view
 import Classes.Balances.CostOfSalesBalance
+import Classes.RevenuesClass
+import javafx.geometry.Side
 import javafx.scene.layout.Border
 import javafx.scene.layout.BorderStroke
+import javafx.scene.layout.Priority
 import javafx.scene.text.FontWeight
 import tornadofx.*
 import java.awt.Color
@@ -44,30 +47,30 @@ class CostOfSalesView :View() {
 
         center = vbox {
             piechart {
-                style {
-                    size = Dimension(10.0,Dimension.LinearUnits.cm)
-                }
                 title = "Composizione dei ricavi"
-                data("Ricavi Operativi",CostOfSalesBalance.netRevenues()/CostOfSalesBalance.totalRevenues)
-                data("Ricavi Commerciali",CostOfSalesBalance.commercialRevenues()/CostOfSalesBalance.totalRevenues)
-                data("Ricavi Finanziari",CostOfSalesBalance.financialRevenues()/CostOfSalesBalance.totalRevenues)
-                data("Ricavi extra gestione",CostOfSalesBalance.extraordinaryRevenues()/CostOfSalesBalance.totalRevenues)
-            }
-            piechart {
-                style {
-                    size = Dimension(10.0,Dimension.LinearUnits.cm)
+                data("Ricavi Operativi", CostOfSalesBalance.netRevenues() / CostOfSalesBalance.totalRevenues)
+                data("Ricavi Commerciali", CostOfSalesBalance.commercialRevenues() / CostOfSalesBalance.totalRevenues)
+                data("Ricavi Finanziari", CostOfSalesBalance.financialRevenues() / CostOfSalesBalance.totalRevenues)
+                data("Ricavi extra gestione", CostOfSalesBalance.extraordinaryRevenues() / CostOfSalesBalance.totalRevenues)
                 }
+            /*piechart {
                 title = "Composizione dei costi"
-                data("Costi Operativi",CostOfSalesBalance.costOfSales()/CostOfSalesBalance.totalCosts)
-                data("Costi Commerciali",CostOfSalesBalance.commercialCosts()/CostOfSalesBalance.totalCosts)
-                data("Costi Finanziari",CostOfSalesBalance.financialCosts()/CostOfSalesBalance.totalCosts)
-                data("Costi extra gestione",CostOfSalesBalance.extraordinaryCosts()/CostOfSalesBalance.totalCosts)
-            }
+                data("Costi Operativi", CostOfSalesBalance.costOfSales() / CostOfSalesBalance.totalCosts)
+                data("Costi Commerciali", CostOfSalesBalance.commercialCosts() / CostOfSalesBalance.totalCosts)
+                data("Costi Finanziari", CostOfSalesBalance.financialCosts() / CostOfSalesBalance.totalCosts)
+                data("Costi extra gestione", CostOfSalesBalance.extraordinaryCosts() / CostOfSalesBalance.totalCosts)
+                this.labelsVisible = false
+                this.legendSide = Side.LEFT
+                this.scaleX = 0.75
+                this.scaleY = 0.75
+            }*/
         }
-        right = form {
-            fieldset ("Riferimenti rapidi"){
-                field ("Ricavi / Costi"){label((CostOfSalesBalance.totalRevenues/CostOfSalesBalance.totalCosts).toString()) }
+
+        right = listview <String> {
+            hboxConstraints {
+                hGrow = Priority.ALWAYS
             }
+            items.addAll("Indice di redditività (Ricavi/Costi): ${CostOfSalesBalance.totalRevenues/CostOfSalesBalance.totalCosts}")
         }
 
 
