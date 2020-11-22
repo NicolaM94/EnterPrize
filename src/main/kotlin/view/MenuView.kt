@@ -9,6 +9,9 @@ class MenuView() :View() {
     override val root = vbox {
         menubar {
             menu("File") {
+                item("Carica bilancio").action {
+
+                }
             }
             menu ("Visualizza") {}
             menu ("La mia azienda"){

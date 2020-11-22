@@ -82,15 +82,16 @@ class CostOfSalesView :View() {
         }
 
         right = listview <String> {
+            title = "Indici significativi"
             style {
                 setPrefWidth(350.0)
             }
             items.addAll(
-                    "Indice di redditività (Ricavi/Costi): ${(CostOfSalesBalance.totalRevenues/CostOfSalesBalance.totalCosts).toFloat()}",
-                    "Indice di redditività operativa: ${(CostOfSalesBalance.netRevenues()/CostOfSalesBalance.costOfSales()).toFloat()}",
-                    "Indice di redditività commerciale: ${(CostOfSalesBalance.commercialRevenues()/CostOfSalesBalance.commercialCosts()).toFloat()}",
-                    "Indice di redditivitò finanziaria: ${(CostOfSalesBalance.financialCosts()/CostOfSalesBalance.financialCosts()).toFloat()}",
-                    "Indice di redditività extra gestione: ${(CostOfSalesBalance.extraordinaryRevenues()/CostOfSalesBalance.extraordinaryCosts()).toFloat()}"
+                    "Redditività (Ricavi/Costi): ${(CostOfSalesBalance.totalRevenues/CostOfSalesBalance.totalCosts).toFloat()}",
+                    "Redditività operativa: ${(CostOfSalesBalance.netRevenues()/CostOfSalesBalance.costOfSales()).toFloat()}",
+                    "Redditività commerciale: ${(CostOfSalesBalance.commercialRevenues()/CostOfSalesBalance.commercialCosts()).toFloat()}",
+                    "Redditivitò finanziaria: ${(CostOfSalesBalance.financialCosts()/CostOfSalesBalance.financialCosts()).toFloat()}",
+                    "Redditività extra gestione: ${(CostOfSalesBalance.extraordinaryRevenues()/CostOfSalesBalance.extraordinaryCosts()).toFloat()}"
             )
 
         }
