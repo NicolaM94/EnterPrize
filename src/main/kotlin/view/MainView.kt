@@ -3,6 +3,8 @@ package view
 import tornadofx.*
 import Classes.*
 import Classes.Balances.CostOfSalesBalance
+import javafx.beans.property.ObjectProperty
+import javafx.beans.value.ObservableValue
 import javafx.geometry.NodeOrientation
 import javafx.geometry.Orientation
 import javafx.scene.Node
@@ -12,6 +14,7 @@ import javafx.scene.paint.Color
 import javafx.stage.FileChooser
 import java.awt.Insets
 import java.awt.Paint
+import java.io.File
 import javax.swing.text.html.CSS
 
 class MainView :View () {
@@ -24,8 +27,7 @@ class MainView :View () {
 
     }
 
-    val menu :MenuView by inject()
-
+    val menu = find(MenuView::class)
 
 
     override val root = borderpane {

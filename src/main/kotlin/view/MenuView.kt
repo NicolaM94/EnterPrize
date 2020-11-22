@@ -1,14 +1,19 @@
 package view
 import javafx.scene.paint.Color
 import tornadofx.*
+import java.awt.Menu
 
 
 class MenuView() :View() {
 
     override val root = vbox {
         menubar {
-            menu ("File") {}
+            menu("File") {
+            }
             menu ("Visualizza") {}
+            menu ("La mia azienda"){
+
+            }
         }
         separator()
         menubar {
@@ -19,7 +24,7 @@ class MenuView() :View() {
                 menu("Conto Economico") {
                     item("Costo del venduto"){
                         action {
-                            val a = find<MainView>()
+                            val a = find (MainView::class)
                             a.replaceWith<CostOfSalesView>()
                         }
                     }

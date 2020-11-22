@@ -1,5 +1,6 @@
 package view
 import Classes.RDVBalanceContentCatcher
+import org.codehaus.groovy.tools.shell.Main
 import tornadofx.*
 
 
@@ -14,7 +15,9 @@ class ModifierPopUp :View() {
             field ("Durata"){ textfield() }
 
             button ("Salva modifiche"){
-                 //TODO Finish implementig changes of costs
+                 action {
+
+                 }
             }
             button ("Esci").action { close() }
         }

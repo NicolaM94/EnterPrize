@@ -2,6 +2,8 @@ package view
 import Classes.Balances.CostOfSalesBalance
 import Classes.RevenuesClass
 import javafx.geometry.Side
+import javafx.scene.chart.CategoryAxis
+import javafx.scene.chart.NumberAxis
 import javafx.scene.layout.Border
 import javafx.scene.layout.BorderStroke
 import javafx.scene.layout.Priority
@@ -12,7 +14,7 @@ import java.awt.Paint
 
 class CostOfSalesView :View() {
 
-    val menu:MenuView by inject()
+    val menu = find(MenuView::class)
 
     override val root = borderpane {
         title = "EnterPrize - Conto Economico al costo del venduto"
@@ -52,25 +54,45 @@ class CostOfSalesView :View() {
                 data("Ricavi Commerciali", CostOfSalesBalance.commercialRevenues() / CostOfSalesBalance.totalRevenues)
                 data("Ricavi Finanziari", CostOfSalesBalance.financialRevenues() / CostOfSalesBalance.totalRevenues)
                 data("Ricavi extra gestione", CostOfSalesBalance.extraordinaryRevenues() / CostOfSalesBalance.totalRevenues)
+                isLegendVisible = false
                 }
-            /*piechart {
+            piechart {
                 title = "Composizione dei costi"
                 data("Costi Operativi", CostOfSalesBalance.costOfSales() / CostOfSalesBalance.totalCosts)
                 data("Costi Commerciali", CostOfSalesBalance.commercialCosts() / CostOfSalesBalance.totalCosts)
                 data("Costi Finanziari", CostOfSalesBalance.financialCosts() / CostOfSalesBalance.totalCosts)
                 data("Costi extra gestione", CostOfSalesBalance.extraordinaryCosts() / CostOfSalesBalance.totalCosts)
-                this.labelsVisible = false
-                this.legendSide = Side.LEFT
-                this.scaleX = 0.75
-                this.scaleY = 0.75
-            }*/
+                isLegendVisible = false
+            }
+            barchart("Margine ricavo-costo delle aree", CategoryAxis(), NumberAxis()) {
+                series("Ricavi") {
+                    data("Operativi",CostOfSalesBalance.netRevenues())
+                    data("Commerciali",CostOfSalesBalance.commercialRevenues())
+                    data("Finanziari",CostOfSalesBalance.financialRevenues())
+                    data("Extra",CostOfSalesBalance.extraordinaryRevenues())
+                }
+                series ("Costi") {
+                    data("Operativi",CostOfSalesBalance.costOfSales())
+                    data("Commerciali",CostOfSalesBalance.commercialCosts())
+                    data("Finanziari",CostOfSalesBalance.financialCosts())
+                    data("Extra",CostOfSalesBalance.extraordinaryCosts())
+
+                }
+            }
         }
 
         right = listview <String> {
-            hboxConstraints {
-                hGrow = Priority.ALWAYS
+            style {
+                setPrefWidth(350.0)
             }
-            items.addAll("Indice di redditività (Ricavi/Costi): ${CostOfSalesBalance.totalRevenues/CostOfSalesBalance.totalCosts}")
+            items.addAll(
+                    "Indice di redditività (Ricavi/Costi): ${(CostOfSalesBalance.totalRevenues/CostOfSalesBalance.totalCosts).toFloat()}",
+                    "Indice di redditività operativa: ${(CostOfSalesBalance.netRevenues()/CostOfSalesBalance.costOfSales()).toFloat()}",
+                    "Indice di redditività commerciale: ${(CostOfSalesBalance.commercialRevenues()/CostOfSalesBalance.commercialCosts()).toFloat()}",
+                    "Indice di redditivitò finanziaria: ${(CostOfSalesBalance.financialCosts()/CostOfSalesBalance.financialCosts()).toFloat()}",
+                    "Indice di redditività extra gestione: ${(CostOfSalesBalance.extraordinaryRevenues()/CostOfSalesBalance.extraordinaryCosts()).toFloat()}"
+            )
+
         }
 
 
