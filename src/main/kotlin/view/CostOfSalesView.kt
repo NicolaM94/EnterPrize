@@ -18,23 +18,10 @@ class CostOfSalesView :View() {
 
     override val root = borderpane {
         title = "EnterPrize - Conto Economico al costo del venduto"
-
-        top = menubar {
-            menu("File") {
-                item("Carica bilancio").action {
-                    val alpha = chooseFile(
-                            title = "EnterPrize - Carica il bilancio",
-                            filters = arrayOf(FileChooser.ExtensionFilter("Excell","*.xlsx")),
-                            mode = FileChooserMode.Single
-                    )
-                }
-            }
-            menu ("Visualizza") {}
-            menu ("La mia azienda"){
-
-            }
+        borderpaneConstraints {
+            vgrow = Priority.ALWAYS
+            hgrow = Priority.ALWAYS
         }
-
         left = form {
             fieldset ("Gestione Operativa"){
                 field ("+ Ricavi netti") { label(CostOfSalesBalance.netRevenues().toString()) }
@@ -109,33 +96,5 @@ class CostOfSalesView :View() {
             )
 
         }
-
-        bottom = menubar {
-            style {
-                this.backgroundColor.add(javafx.scene.paint.Color.LIGHTBLUE)
-            }
-            menu("Riclassificazioni") {
-                menu("Conto Economico") {
-                    item("Costo del venduto"){
-                        action {
-                            val a = find (MainView::class)
-                            a.replaceWith<CostOfSalesView>()
-                        }
-                    }
-                    item ("Valore aggiunto") {}
-                    item ("Margine di contribuzione") {}
-                }
-                menu("Stato Patrimoniale") {}
-            }
-            menu("Analisi Reddituale") { }
-            menu("Analisi Patrimoniale") {}
-            menu ("Analisi della solidità"){ }
-            menu ("Analisi del pareggio"){  }
-            menu ("Analisi del contesto") {}
-            menu("Analisi clientela") {}
-            menu ("Costruzione del preventivo") {}
-        }
-
-
     }
 }

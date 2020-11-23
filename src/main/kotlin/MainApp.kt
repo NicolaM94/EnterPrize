@@ -4,15 +4,15 @@ import tornadofx.*
 
 
 
-class MainApp :App(MainView::class) {
+class MainApp :App(FirstView::class) {
 
-    /*override fun start(stage: Stage) {
+    override fun start(stage: Stage) {
 
         stage.width = 1280.00
         stage.height = 720.00
 
         super.start(stage)
 
-    }*/
+    }
 
 }
