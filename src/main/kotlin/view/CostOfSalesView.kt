@@ -1,5 +1,6 @@
 package view
 import Classes.Balances.CostOfSalesBalance
+import Classes.RDVBalanceContentCatcher
 import Classes.RevenuesClass
 import javafx.geometry.Side
 import javafx.scene.chart.CategoryAxis
@@ -8,18 +9,31 @@ import javafx.scene.layout.Border
 import javafx.scene.layout.BorderStroke
 import javafx.scene.layout.Priority
 import javafx.scene.text.FontWeight
+import javafx.stage.FileChooser
 import tornadofx.*
 import java.awt.Color
 import java.awt.Paint
 
 class CostOfSalesView :View() {
 
-    val menu = find(MenuView::class)
-
     override val root = borderpane {
         title = "EnterPrize - Conto Economico al costo del venduto"
 
-        top = menu.root
+        top = menubar {
+            menu("File") {
+                item("Carica bilancio").action {
+                    val alpha = chooseFile(
+                            title = "EnterPrize - Carica il bilancio",
+                            filters = arrayOf(FileChooser.ExtensionFilter("Excell","*.xlsx")),
+                            mode = FileChooserMode.Single
+                    )
+                }
+            }
+            menu ("Visualizza") {}
+            menu ("La mia azienda"){
+
+            }
+        }
 
         left = form {
             fieldset ("Gestione Operativa"){
@@ -94,6 +108,32 @@ class CostOfSalesView :View() {
                     "Redditività extra gestione: ${(CostOfSalesBalance.extraordinaryRevenues()/CostOfSalesBalance.extraordinaryCosts()).toFloat()}"
             )
 
+        }
+
+        bottom = menubar {
+            style {
+                this.backgroundColor.add(javafx.scene.paint.Color.LIGHTBLUE)
+            }
+            menu("Riclassificazioni") {
+                menu("Conto Economico") {
+                    item("Costo del venduto"){
+                        action {
+                            val a = find (MainView::class)
+                            a.replaceWith<CostOfSalesView>()
+                        }
+                    }
+                    item ("Valore aggiunto") {}
+                    item ("Margine di contribuzione") {}
+                }
+                menu("Stato Patrimoniale") {}
+            }
+            menu("Analisi Reddituale") { }
+            menu("Analisi Patrimoniale") {}
+            menu ("Analisi della solidità"){ }
+            menu ("Analisi del pareggio"){  }
+            menu ("Analisi del contesto") {}
+            menu("Analisi clientela") {}
+            menu ("Costruzione del preventivo") {}
         }
 
 

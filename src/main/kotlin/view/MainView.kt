@@ -3,6 +3,7 @@ package view
 import tornadofx.*
 import Classes.*
 import Classes.Balances.CostOfSalesBalance
+import Classes.Balances.TableContent
 import javafx.beans.property.ObjectProperty
 import javafx.beans.value.ObservableValue
 import javafx.geometry.NodeOrientation
@@ -19,24 +20,33 @@ import javax.swing.text.html.CSS
 
 class MainView :View () {
 
-    var pathToBalance :String
-
     init {
         val fileChooser = chooseFile("EnterPrize - CARICA IL BILANCIO", arrayOf(FileChooser.ExtensionFilter("Excell File","*.xlsx")))
-        pathToBalance = fileChooser.get(0).absolutePath
-
+        RDVBalanceContentCatcher(fileChooser[0].absolutePath)
     }
-
-    val menu = find(MenuView::class)
-
 
     override val root = borderpane {
 
         title = "EnterPrize @Nicola Moro - 2020"
 
-        top = menu.root
+        top = menubar {
+            menu("File") {
+                item("Carica bilancio").action {
+                    val alpha = chooseFile(
+                            title = "EnterPrize - Carica il bilancio",
+                            filters = arrayOf(FileChooser.ExtensionFilter("Excell","*.xlsx")),
+                            mode = FileChooserMode.Single
+                    )
+                    center = borderpane()
+                }
+            }
+            menu ("Visualizza") {}
+            menu ("La mia azienda"){
 
-        center = tableview (RDVBalanceContentCatcher(pathToBalance).allCountsProperty) {
+            }
+        }
+
+        center = tableview (TableContent.allCountsProperty) {
 
             column("ID",Count::countId)
             column("Nome",Count::countName)
@@ -50,6 +60,32 @@ class MainView :View () {
                 }
             }
 
+        }
+
+        bottom = menubar {
+            style {
+                this.backgroundColor.add(Color.LIGHTBLUE)
+            }
+            menu("Riclassificazioni") {
+                menu("Conto Economico") {
+                    item("Costo del venduto"){
+                        action {
+                            val a = find (MainView::class)
+                            a.replaceWith<CostOfSalesView>()
+                        }
+                    }
+                    item ("Valore aggiunto") {}
+                    item ("Margine di contribuzione") {}
+                }
+                menu("Stato Patrimoniale") {}
+            }
+            menu("Analisi Reddituale") { }
+            menu("Analisi Patrimoniale") {}
+            menu ("Analisi della solidità"){ }
+            menu ("Analisi del pareggio"){  }
+            menu ("Analisi del contesto") {}
+            menu("Analisi clientela") {}
+            menu ("Costruzione del preventivo") {}
         }
     }
 }

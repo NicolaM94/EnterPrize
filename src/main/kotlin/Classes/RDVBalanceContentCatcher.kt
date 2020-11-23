@@ -1,5 +1,6 @@
 package Classes
 
+import Classes.Balances.TableContent
 import javafx.beans.property.SimpleListProperty
 import org.apache.poi.openxml4j.opc.OPCPackage
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
@@ -7,18 +8,17 @@ import tornadofx.asObservable
 import tornadofx.find
 
 
-open class RDVBalanceContentCatcher(pathToBalance:String?) {
+class RDVBalanceContentCatcher (pathToBalanceMethod:String){
 
+    val pathToBalance = pathToBalanceMethod
     val pacakge = OPCPackage.open(pathToBalance)
+
     val workbook = XSSFWorkbook(pacakge)
 
     val activities = AssetClass.allAssetCountsProperty
     val debts = DebtClass.allDebtCountsProperty
     val costs = CostClass.allCostCountsProperty
     val revenues = RevenuesClass.allRevenuesCountsProperty
-
-    val allCounts = mutableListOf<Count>().asObservable()
-    open val allCountsProperty = SimpleListProperty(allCounts)
 
     init {
 
@@ -88,18 +88,18 @@ open class RDVBalanceContentCatcher(pathToBalance:String?) {
 
 
 
-
+        TableContent.allCountsProperty.clear()
         activities.forEach { count ->
-            allCountsProperty.add(count)
+            TableContent.allCountsProperty.add(count)
         }
         debts.forEach { count ->
-            allCountsProperty.add(count)
+            TableContent.allCountsProperty.add(count)
         }
         costs.forEach { count ->
-            allCountsProperty.add(count)
+            TableContent.allCountsProperty.add(count)
         }
         revenues.forEach { count ->
-            allCountsProperty.add(count)
+            TableContent.allCountsProperty.add(count)
         }
 
     }
