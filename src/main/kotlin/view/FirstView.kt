@@ -19,7 +19,7 @@ class FirstView :View() {
         menubar {
             menu("File") {
                 item("\u2B8C Home").action {
-                    parent.getChildList()?.set(2,injectedView.root)
+                    parent.getChildList()?.set(2,find(MainView::class).root)
                 }
                 item("Carica bilancio").action {
                     val alpha = chooseFile(
@@ -63,7 +63,7 @@ class FirstView :View() {
             menu ("Costruzione del preventivo") {}
         }
 
-        this.add(injectedView.root)
+        this.add(find(MainView::class).root)
 
 
 
