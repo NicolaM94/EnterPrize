@@ -4,15 +4,10 @@ import tornadofx.*
 
 
 
-class MainApp :App(FirstView::class) {
+class MainApp :App(VeryFirstView::class) {
 
-    override fun start(stage: Stage) {
-
-        stage.width = 1280.00
-        stage.height = 720.00
-
-        super.start(stage)
-
+    override fun onBeforeShow(view: UIComponent) {
+        workspace.dock<FirstView>()
     }
 
 }
