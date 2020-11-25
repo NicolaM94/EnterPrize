@@ -1,48 +1,37 @@
 package view
-
-import tornadofx.*
-import Classes.*
-import Classes.Balances.CostOfSalesBalance
 import Classes.Balances.TableContent
-import javafx.beans.property.ListProperty
-import javafx.beans.property.ObjectProperty
-import javafx.beans.value.ObservableValue
-import javafx.geometry.NodeOrientation
-import javafx.geometry.Orientation
-import javafx.scene.Node
-import javafx.scene.layout.Background
-import javafx.scene.layout.BackgroundFill
+import Classes.Count
+import Classes.RDVBalanceContentCatcher
+import javafx.beans.property.StringProperty
 import javafx.scene.layout.Priority
-import javafx.scene.paint.Color
 import javafx.stage.FileChooser
-import java.awt.Insets
-import java.awt.Paint
-import java.io.File
-import javax.swing.text.html.CSS
-
-class MainView :View () {
+import tornadofx.*
 
 
-    override val root = tableview (TableContent.allCountsProperty) {
+class MainView :View() {
 
-        vboxConstraints {
-            vgrow = Priority.ALWAYS
-        }
+    init {
+        val fileChooser = chooseFile("EnterPrize - CARICA IL BILANCIO", arrayOf(FileChooser.ExtensionFilter("Excell File", "*.xlsx")))
+        RDVBalanceContentCatcher(fileChooser[0].absolutePath)
+    }
 
-        column("ID",Count::countId)
-        column("Nome",Count::countName)
-        column("Valore",Count::countValue)
-        column("Tipo",Count::countType)
-        column("Durata",Count::countDuration)
+    override val root = tableview(TableContent.allCountsProperty) {
+
+        title = "Bilancio d'esercizio"
+
+        column("ID", Count::countId)
+        column("Nome", Count::countName)
+        column("Valore", Count::countValue)
+        column("Tipo", Count::countType)
+        column("Durata", Count::countDuration)
 
         contextmenu {
             item("Modifica").action {
-                val a = find(FirstView::class)
-                openInternalWindow(ModifierPopUp::class,owner = a.root)
+                workspace.openInternalWindow<ModifierPopUp>()
+            }
+
         }
 
-    }
 
     }
 }
-

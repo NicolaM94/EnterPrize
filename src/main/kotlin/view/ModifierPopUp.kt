@@ -1,12 +1,7 @@
 package view
-import Classes.Balances.TableContent
-import Classes.Count
-import Classes.RDVBalanceContentCatcher
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleStringProperty
-import javafx.geometry.Insets
 import javafx.scene.layout.Priority
-import org.codehaus.groovy.tools.shell.Main
 import tornadofx.*
 
 

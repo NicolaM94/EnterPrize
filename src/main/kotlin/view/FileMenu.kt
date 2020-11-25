@@ -11,8 +11,8 @@ class FileMenu :View() {
 
 
         menu("File") {
-            item("\u2B8C Home").action {
-                //workspace.dockInNewScope<FirstView>()
+            item("Home").action {
+                workspace.dock<MainView>()
             }
             item("Carica bilancio").action {
                 val alpha = chooseFile(

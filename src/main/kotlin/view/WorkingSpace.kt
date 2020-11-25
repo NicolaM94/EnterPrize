@@ -2,7 +2,7 @@ package view
 
 import tornadofx.*
 
-class VeryFirstView :Workspace () {
+class WorkingSpace :Workspace () {
 
     init {
 

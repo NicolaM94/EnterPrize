@@ -4,10 +4,11 @@ import tornadofx.*
 
 
 
-class MainApp :App(VeryFirstView::class) {
+class MainApp :App(WorkingSpace::class) {
 
     override fun onBeforeShow(view: UIComponent) {
-        workspace.dock<FirstView>()
+        workspace.dock<MainView>()
     }
+
 
 }

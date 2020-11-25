@@ -83,7 +83,6 @@ class CostOfSalesView :View() {
         }
 
         right = listview <String> {
-            title = "Indici significativi"
             style {
                 setPrefWidth(350.0)
             }

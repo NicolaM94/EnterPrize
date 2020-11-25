@@ -15,10 +15,7 @@ class ActivityMenu :View() {
             menu("Conto Economico") {
                 item("Costo del venduto"){
                     action {
-                        /*val a = find (MainView::class)
-                        a.replaceWith<CostOfSalesView>()*/
-                        val getter = find(CostOfSalesView::class)
-                        parent.getChildList()?.set(2,getter.root)
+                        workspace.dock<CostOfSalesView>()
                     }
                 }
                 item ("Valore aggiunto") {}
